@@ -1,0 +1,35 @@
+services:
+  zookeeper:
+    build: 
+      context: .
+    command: [sh,/kafka/bin/zookeeperver-start.sh,/config/zookeeper.properties]
+    working_dir: /kakfa
+    volumes:
+      - ./config:/config
+  broker1:
+    build: 
+      context: .
+    command: [sh,/kafka/bin/kafka-server-start.sh,/config/broker1.properties]
+    working_dir: /kakfa
+    depends_on:
+      - zookeeper
+    volumes:
+      - ./config:/config
+  broker2:
+    build: 
+      context: .
+    command: [sh,/kafka/bin/kafka-server-start.sh,/config/broker2.properties]
+    depends_on:
+      - zookeeper
+    working_dir: /kakfa
+    volumes:
+      - ./config:/config
+  broker3:
+    build: 
+      context: .
+    command: [sh,/kafka/bin/kafka-server-start.sh,/config/broker3.properties]
+    depends_on:
+      - zookeeper
+    working_dir: /kakfa
+    volumes:
+      - ./config:/config
