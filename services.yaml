@@ -1,0 +1,6 @@
+services:
+  tools:
+    build: 
+      context: .
+    command: [bash]
+    working_dir: /kakfa
