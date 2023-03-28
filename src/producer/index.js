@@ -13,7 +13,7 @@ send = async () => {
     var counter = 0;
     setInterval(async () => {
         await producer.send({
-        topic: 'testTopic',
+        topic: 'topic-test',
         messages: [
             { value: 'Hello KafkaJS user!  ' + counter ++ },
         ],

@@ -32,10 +32,35 @@ topic-delete:
 	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
 		"./bin/kafka-topics.sh --bootstrap-server $(bootstrap-server) --delete --topic $$topic"
 
+topic-describe:
+	@read -p "Enter topic name: " topic; \
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-topics.sh --bootstrap-server $(bootstrap-server) --describe --topic $$topic"
+
+topic-list:
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-topics.sh --bootstrap-server $(bootstrap-server) --list"
+
+group-describe:
+	@read -p "Enter group name: " group; \
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-consumer-groups.sh --bootstrap-server $(bootstrap-server) --describe --group $$group"
+
+group-list:
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-consumer-groups.sh --bootstrap-server $(bootstrap-server) --list"
+
+
+
 console-consumer:
 	@read -p "Enter topic name: " topic; \
 	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
 		"./bin/kafka-console-consumer.sh --bootstrap-server $(bootstrap-server) --topic $$topic"
+
+console-consumer-fb:
+	@read -p "Enter topic name: " topic; \
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-console-consumer.sh --bootstrap-server $(bootstrap-server) --topic $$topic --from-beginning"
 
 console-producer:
 	@read -p "Enter topic name: " topic; \
