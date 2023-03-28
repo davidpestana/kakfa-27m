@@ -2,7 +2,7 @@ services:
   zookeeper:
     build: 
       context: .
-    command: [sh,/kafka/bin/zookeeperver-start.sh,/config/zookeeper.properties]
+    command: [sh,/kafka/bin/zookeeper-server-start.sh,/config/zookeeper.properties]
     working_dir: /kakfa
     volumes:
       - ./config:/config
