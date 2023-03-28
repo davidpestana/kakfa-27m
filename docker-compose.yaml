@@ -3,7 +3,7 @@ services:
     build: 
       context: .
     command: [sh,/kafka/bin/zookeeper-server-start.sh,/config/zookeeper.properties]
-    working_dir: /kakfa
+    working_dir: /kafka
     volumes:
       - ./config:/config
 
@@ -11,7 +11,9 @@ services:
     build: 
       context: .
     command: [sh,/kafka/bin/kafka-server-start.sh,/config/broker1.properties]
-    working_dir: /kakfa
+    working_dir: /kafka
+    ports:
+      - 29092:29092
     depends_on:
       - zookeeper
     volumes:
@@ -23,7 +25,9 @@ services:
     command: [sh,/kafka/bin/kafka-server-start.sh,/config/broker2.properties]
     depends_on:
       - zookeeper
-    working_dir: /kakfa
+    working_dir: /kafka
+    ports:
+      - 29093:29093
     volumes:
       - ./config:/config
       - ./data/broker2:/kafka-logs
@@ -33,7 +37,9 @@ services:
     command: [sh,/kafka/bin/kafka-server-start.sh,/config/broker3.properties]
     depends_on:
       - zookeeper
-    working_dir: /kakfa
+    working_dir: /kafka
+    ports:
+      - 29094:29094
     volumes:
       - ./config:/config
       - ./data/broker3:/kafka-logs

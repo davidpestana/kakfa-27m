@@ -16,7 +16,7 @@ services:
   producer-example-2:
     image: node
     deploy:
-      replicas: 10
+      replicas: 2
     command: [node, index.js]
     working_dir: /app
     volumes:
