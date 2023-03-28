@@ -13,9 +13,9 @@ send = async () => {
     var counter = 0;
     setInterval(async () => {
         await producer.send({
-        topic: 'topic-test',
+        topic: process.env.TOPIC,
         messages: [
-            { value: 'Hello KafkaJS user!  ' + counter ++ },
+            { value: 'Hello KafkaJS user!  ' + counter ++, partition: 1 },
         ],
         })
     },1000);

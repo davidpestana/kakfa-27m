@@ -5,7 +5,7 @@ start:
 	docker compose logs -f
 
 start-producers:
-	docker compose -f docker-compose.yaml -f producers.yaml run producer-example-1
+	docker compose -f docker-compose.yaml -f producers.yaml up -d
 
 cleanup:
 	docker compose down --remove-orphans
@@ -54,8 +54,9 @@ group-list:
 
 console-consumer:
 	@read -p "Enter topic name: " topic; \
+	read -p "Enter group name: " group; \
 	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
-		"./bin/kafka-console-consumer.sh --bootstrap-server $(bootstrap-server) --topic $$topic"
+		"./bin/kafka-console-consumer.sh --bootstrap-server $(bootstrap-server) --topic $$topic --group $$group"
 
 console-consumer-fb:
 	@read -p "Enter topic name: " topic; \

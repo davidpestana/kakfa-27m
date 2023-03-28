@@ -1,7 +1,28 @@
 services:
+  consumer-example-1:
+    image: node
+    command: [node, consumer.js]
+    working_dir: /app
+    volumes:
+      - ./src/producer/:/app
   producer-example-1:
     image: node
     command: [node, index.js]
     working_dir: /app
     volumes:
       - ./src/producer/:/app
+    environment:
+      TOPIC: topic-test
+  producer-example-2:
+    image: node
+    deploy:
+      replicas: 10
+    command: [node, index.js]
+    working_dir: /app
+    volumes:
+      - ./src/producer/:/app
+    environment:
+      TOPIC: topic-2
+
+
+  
