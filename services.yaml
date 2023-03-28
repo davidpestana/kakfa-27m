@@ -4,3 +4,6 @@ services:
       context: .
     command: [bash]
     working_dir: /kafka
+    volumes:
+      - ./config:/config
+      - ./data:/data

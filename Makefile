@@ -10,6 +10,10 @@ start-producers:
 cleanup:
 	docker compose down --remove-orphans
 
+remove:
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c "rm -rf /data/*"
+
+
 build:
 	docker compose build
 
@@ -28,6 +32,15 @@ topic-delete:
 	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
 		"./bin/kafka-topics.sh --bootstrap-server $(bootstrap-server) --delete --topic $$topic"
 
+console-consumer:
+	@read -p "Enter topic name: " topic; \
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-console-consumer.sh --bootstrap-server $(bootstrap-server) --topic $$topic"
+
+console-producer:
+	@read -p "Enter topic name: " topic; \
+	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c \
+		"./bin/kafka-console-producer.sh --bootstrap-server $(bootstrap-server) --topic $$topic"
 
 node:
 	docker compose -f producers.yaml run --rm producer-example-1 bash

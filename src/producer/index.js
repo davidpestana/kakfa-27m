@@ -10,11 +10,12 @@ const producer = kafka.producer()
 
 send = async () => {
     await producer.connect();
+    var counter = 0;
     setInterval(async () => {
         await producer.send({
         topic: 'testTopic',
         messages: [
-            { value: 'Hello KafkaJS user!' },
+            { value: 'Hello KafkaJS user!  ' + counter ++ },
         ],
         })
     },1000);
