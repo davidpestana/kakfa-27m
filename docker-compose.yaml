@@ -6,6 +6,7 @@ services:
     working_dir: /kakfa
     volumes:
       - ./config:/config
+
   broker1:
     build: 
       context: .
@@ -15,6 +16,7 @@ services:
       - zookeeper
     volumes:
       - ./config:/config
+      - ./data/broker1:/kafka-logs
   broker2:
     build: 
       context: .
@@ -24,6 +26,7 @@ services:
     working_dir: /kakfa
     volumes:
       - ./config:/config
+      - ./data/broker2:/kafka-logs
   broker3:
     build: 
       context: .
@@ -33,3 +36,4 @@ services:
     working_dir: /kakfa
     volumes:
       - ./config:/config
+      - ./data/broker3:/kafka-logs
