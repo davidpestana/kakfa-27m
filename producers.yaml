@@ -23,6 +23,10 @@ services:
       - ./src/producer/:/app
     environment:
       TOPIC: topic-2
-
-
+  registry-example:
+    image: node
+    command: [node, schema-registry-example.js]
+    working_dir: /app
+    volumes:
+      - ./src/producer/:/app
   

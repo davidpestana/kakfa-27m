@@ -13,6 +13,8 @@ cleanup:
 remove:
 	docker compose -f docker-compose.yaml -f services.yaml run --rm tools bash -c "rm -rf /data/*"
 
+remove-containers:
+	docker rm -f $$(docker ps -aq)
 
 build:
 	docker compose build
